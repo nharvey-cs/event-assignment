@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import EventList from "./EventList";
 import EventForm from "./EventForm";
+import EventDetail from "./EventDetail";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -49,11 +51,23 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Event List</h1>
-      <EventForm onAddEvent={addEvent} />
-      <EventList events={events} onDelete={handleDelete} />
-    </div>
+    <Router>
+      <div>
+        <h1>Event List</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <EventForm onAddEvent={addEvent} />
+                <EventList events={events} onDelete={handleDelete} />
+              </>
+            }
+          />
+          <Route path="/events/:id" element={<EventDetail />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
