@@ -17,6 +17,7 @@ const EventDetail = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -34,6 +35,7 @@ const EventDetail = () => {
         setEmail(data.email || "");
         setPhone(data.phone || "");
         setAddress(data.address || "");
+        setImage(data.image || "");
       } catch (error) {
         console.error("Failed to load event:", error);
       } finally {
@@ -54,6 +56,7 @@ const EventDetail = () => {
       email,
       phone,
       address,
+      image,
     };
 
     try {
@@ -74,14 +77,6 @@ const EventDetail = () => {
   return (
     <div>
       <h2>{isEditing ? "Edit Event" : event.name}</h2>
-      {event.image && (
-        <div>
-          <img
-            src={event.image}
-            style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
-          />
-        </div>
-      )}
       {isEditing ? (
         <>
           <div>
@@ -93,27 +88,11 @@ const EventDetail = () => {
             />
           </div>
           <div>
-            <label>Description:</label>
+            <label>Image URL:</label>
             <input
               type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Company:</label>
-            <input
-              type="text"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Color:</label>
-            <input
-              type="text"
-              value={color}
-              onChange={(e) => setColor(e.target.value)}
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
             />
           </div>
           <div>
@@ -130,6 +109,22 @@ const EventDetail = () => {
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Description:</label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Company:</label>
+            <input
+              type="text"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
             />
           </div>
           <div>
@@ -156,11 +151,27 @@ const EventDetail = () => {
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
+          <div>
+            <label>Color:</label>
+            <input
+              type="text"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+            />
+          </div>
           <button onClick={() => setIsEditing(false)}>Cancel</button>
           <button onClick={() => handleSave()}>Save</button>
         </>
       ) : (
         <>
+          {event.image && (
+            <div>
+              <img
+                src={event.image}
+                style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
+              />
+            </div>
+          )}
           <p>
             <strong>Date:</strong> {event.date}
           </p>
