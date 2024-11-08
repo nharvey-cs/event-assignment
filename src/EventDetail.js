@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { namedColors } from "./namedColors";
 
 const EventDetail = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const EventDetail = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [image, setImage] = useState("");
+  const [colorError, setColorError] = useState("");
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -46,6 +48,11 @@ const EventDetail = () => {
   }, [id]);
 
   const handleSave = async () => {
+    if (!namedColors.includes(color.toLowerCase())) {
+      setColorError("Please enter a valid, web safe color name.");
+      return;
+    }
+    setColorError("");
     const updatedEvent = {
       name,
       description,
@@ -156,8 +163,12 @@ const EventDetail = () => {
             <input
               type="text"
               value={color}
-              onChange={(e) => setColor(e.target.value)}
+              onChange={(e) => {
+                setColor(e.target.value);
+                if (colorError) setColorError("");
+              }}
             />
+            {colorError && <p style={{ color: "red" }}>{colorError}</p>}
           </div>
           <button onClick={() => setIsEditing(false)}>Cancel</button>
           <button onClick={() => handleSave()}>Save</button>
