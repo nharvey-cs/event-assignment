@@ -53,12 +53,12 @@ const App = () => {
   return (
     <Router>
       <div>
-        <h1>Event List</h1>
         <Routes>
           <Route
             path="/"
             element={
               <>
+                <h1>Event List</h1>
                 <EventForm onAddEvent={addEvent} />
                 <EventList events={events} onDelete={handleDelete} />
               </>
