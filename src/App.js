@@ -4,6 +4,7 @@ import axios from "axios";
 import EventList from "./EventList";
 import EventForm from "./EventForm";
 import EventDetail from "./EventDetail";
+import "./styles.css";
 
 const App = () => {
   const [events, setEvents] = useState([]);

@@ -69,8 +69,8 @@ const EventForm = ({ onAddEvent }) => {
           }}
           required
         />
-        {colorError && <p style={{ color: "red" }}>{colorError}</p>}
       </div>
+      {colorError && <p className="error-message">{colorError}</p>}
       <button type="submit">Add Event</button>
     </form>
   );
