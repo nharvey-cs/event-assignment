@@ -15,7 +15,13 @@ const EventForm = ({ onAddEvent }) => {
       return;
     }
     setColorError("");
-    const newEvent = { name, description, company, color };
+    const newEvent = {
+      name,
+      description,
+      company,
+      color,
+      createdOn: new Date().toISOString(),
+    };
     onAddEvent(newEvent);
     setName("");
     setDescription("");

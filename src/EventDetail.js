@@ -196,6 +196,12 @@ const EventDetail = () => {
           <p>
             <strong>Color:</strong> {event.color}
           </p>
+          <p>
+            <strong>Created On:</strong>{" "}
+            {isNaN(new Date(event.createdOn))
+              ? "N/A"
+              : new Date(event.createdOn).toLocaleString()}
+          </p>
           <button onClick={() => setIsEditing(true)}>Edit</button>
         </>
       )}
