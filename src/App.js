@@ -39,11 +39,20 @@ const App = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://rf-json-server.herokuapp.com/events/${id}`);
+      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+    } catch (error) {
+      console.error("Failed to delete event:", error);
+    }
+  };
+
   return (
     <div>
       <h1>Event List</h1>
       <EventForm onAddEvent={addEvent} />
-      <EventList events={events} />
+      <EventList events={events} onDelete={handleDelete} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const EventList = ({ events }) => {
+const EventList = ({ events, onDelete }) => {
   return (
     <ul>
       {events.map((event) => (
@@ -8,6 +8,7 @@ const EventList = ({ events }) => {
           <h2>{event.name}</h2>
           <p>{event.description}</p>
           <p>{event.company}</p>
+          <button onClick={() => onDelete(event.id)}>Delete</button>
         </li>
       ))}
     </ul>
