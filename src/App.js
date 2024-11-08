@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import EventList from "./EventList";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -15,7 +16,12 @@ const App = () => {
     getEvents();
   }, []);
 
-  return <div>{JSON.stringify(events)}</div>;
+  return (
+    <div>
+      <h1>Event List</h1>
+      <EventList events={events} />
+    </div>
+  );
 };
 
 export default App;
